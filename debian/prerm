@@ -1,9 +1,6 @@
 #!/bin/sh
 set -e
 
-if [ \( "$1" = "upgrade" -o "$1" = "remove" \) -a -L /usr/bin/pindel ]; then
-    update-alternatives --remove pindel /usr/bin/pindel0.2.4o
-    update-alternatives --remove pindel-debug /usr/bin/pindel-debug0.2.4o
-    update-alternatives --remove pindel2vcf /usr/bin/pindel2vcf0.2.4o
-    update-alternatives --remove sam2pindel /usr/bin/sam2pindel0.2.4o
+if [ \( "$1" = "upgrade" -o "$1" = "remove" \) -a -L /usr/bin/savant ]; then
+    update-alternatives --remove savant /usr/bin/savant2.0.1
 fi
