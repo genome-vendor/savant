@@ -1,0 +1,29 @@
+#!/usr/bin/make -f
+
+PKG=pindel0.2.4o
+VER=0.2.4o
+SAMTOOLS=../debian/samtools_headers/   # relative to the src subdirectory
+DEB_DIR=debian/${PKG}
+
+%:
+	dh $@
+
+build:
+	cd src; make SAMTOOLS=${SAMTOOLS}
+	cd src; g++ -O3 vcfcreator.cpp -o pindel2vcf
+	cd src; g++ -O3 SAM_2_PINDEL_cin_2011Sept26.cpp -o sam2pindel
+
+override_dh_auto_install:
+#	dh_auto_install
+	echo "copy files now!"
+	mkdir -p ${DEB_DIR}/usr/lib/${PKG}/bin
+	mkdir -p ${DEB_DIR}/usr/bin
+	for filename in 'pindel' 'pindel-debug' 'pindel2vcf' 'sam2pindel'; do \
+		install -m755 src/$${filename} ${DEB_DIR}/usr/lib/${PKG}/bin/$${filename}; \
+		echo "export PATH=/usr/lib/${PKG}/bin/:\$$PATH; exec $$filename" >  ${DEB_DIR}/usr/bin/$${filename}${VER}; \
+		done
+
+
+
+override_dh_auto_test:
+	echo "This version had no test/ subdirectory.  Skipping tests"

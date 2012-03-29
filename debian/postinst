@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "configure" ]; then
+    if [ ! -e /usr/bin/pindel ]; then
+        update-alternatives --install /usr/bin/pindel pindel /usr/bin/pindel0.2.4o 1
+    fi
+fi
