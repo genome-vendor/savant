@@ -1,0 +1,15 @@
+Source: savant
+Section: science
+Priority: extra
+Maintainer: The Genome Institute <tgi@genome.wustl.edu>
+Build-Depends: debhelper (>= 7.0.0)
+Standards-Version: 3.9.2
+Homepage: http://genomesavant.com/savant/
+Vcs-Svn: https://svn2.assembla.com/svn/savant/Savant/
+
+Package: savant
+Architecture: any
+Replaces: savant-browser
+Conflicts: savant-browser
+Depends: ${shlibs:Depends}, ${misc:Depends}, default-jre
+Description: A desktop visualization tool for genomic data.
