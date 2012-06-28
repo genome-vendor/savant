@@ -1,8 +1,0 @@
-#!/bin/sh
-set -e
-
-if [ "$1" = "configure" ]; then
-    if [ ! -e /usr/bin/savant ]; then
-        update-alternatives --install /usr/bin/savant savant /usr/bin/savant2.0.1 1
-    fi
-fi

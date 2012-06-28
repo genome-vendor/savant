@@ -1,6 +1,0 @@
-#!/bin/sh
-set -e
-
-if [ \( "$1" = "upgrade" -o "$1" = "remove" \) -a -L /usr/bin/savant ]; then
-    update-alternatives --remove savant /usr/bin/savant2.0.1
-fi
