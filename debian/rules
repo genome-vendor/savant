@@ -1,0 +1,21 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+DEB_DIR=debian/savant
+PKG_DIR=/opt/savant
+INS_DIR=$(DEB_DIR)$(PKG_DIR)
+BIN_WRAPPER=\
+'\#!/bin/sh\n'\
+"exec java -jar -Xmx4096m $(PKG_DIR)/Savant.jar" '"$$@"'
+
+%:
+	dh $@
+
+override_dh_auto_install:
+	mkdir -p $(DEB_DIR)/usr/bin $(INS_DIR)/lib $(INS_DIR)/plugins
+	for jar in $$(find lib plugins Savant.jar -type f); do\
+		install -m 555 "$${jar}" "$(INS_DIR)/$${jar}";\
+	done
+	echo $(BIN_WRAPPER) | sed 's/^ *//' > $(DEB_DIR)/usr/bin/savant;\
